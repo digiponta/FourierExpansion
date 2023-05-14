@@ -1,4 +1,4 @@
-# FourierExpansion
+# Fourier Expansion
 Fourier expansion from data in csv file
 
 
