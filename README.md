@@ -9,7 +9,7 @@ monex-fourier.py
 
 (コマンドラインからの起動例)
 
-python monex-fourier.py view_20230513_064542.csv
+python monex-fourier.py view_20230513_xxxxxx.csv
 
 ---
 [実行例]
