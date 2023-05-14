@@ -5,11 +5,16 @@
 import csv
 from datetime import datetime
 import math
+import sys
 
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
 # マネックス証券の口座全体の資産推移からダウンロードしたcsvファイル名
-fname = 'view_20230513_xxxxxx.csv'
+# スクリプト引数で、ファイル名を渡す場合
+fname = sys.argv[1]
+# ハードコーディグで、ファイル名を渡す場合
+#fname = 'view_20230513_064542.csv'
+print( fname )
 
 fname_split = fname.split('.')
 
