@@ -9,7 +9,7 @@ import math
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
 # マネックス証券の口座全体の資産推移からダウンロードしたcsvファイル名
-fname = 'view_20230513_064542.csv'
+fname = 'view_20230513_xxxxxx.csv'
 
 fname_split = fname.split('.')
 
