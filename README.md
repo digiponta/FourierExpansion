@@ -14,13 +14,13 @@ python monex-fourier.py view_20230513_xxxxxx.csv
 ---
 [実行例]
 
-(入力データ)
+(入力データ) view_20230513_xxxxxx.csv
 
 ![入力データ](./2023051401.png)
 
 ---
 
-(出力結果)
+(出力結果) view_20230513_xxxxxx-fourier.csv
 
 ![出力結果](./2023051402.png)
 
