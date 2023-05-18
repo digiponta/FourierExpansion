@@ -33,6 +33,10 @@ python monex-phase-analysis.py view_20230509_xxxxxx-fourier.csv view_20230510_xx
 
 ![出力結果](./2023051603.png)
 
+---
 
+[適用例]
+
+* https://note.com/digiponta/m/m4549d2a07d5a
 
 以上
