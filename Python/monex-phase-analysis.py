@@ -2,11 +2,13 @@
 # フーリエ展開プログラム (monex-fourier.py)
 # made by digi-p@nifty.com,(C)2023, MIT License
 #
+import os
+import glob
 import csv
 from datetime import datetime
 import math
 import sys
-
+import datetime
 
 # マネックス証券の口座全体の資産推移からダウンロードしたcsvファイル名
 # スクリプト引数で、ファイル名を渡す場合
@@ -22,6 +24,7 @@ data1 = []
 data2 = []
 fname =[]
 
+
 print(sys.argv, len(sys.argv) )
 
 if (len(sys.argv) > 1):
@@ -30,18 +33,10 @@ if (len(sys.argv) > 1):
 	 	fname += [sys.argv[ii]]
 	 	print( ii, sys.argv[ii] )
 else:
-	print( 'use the hard coding csv-file list' )
-	# ユーザの環境に応じて、以下のファイル名は修正する必要がある。
-	fname = [	
-		'view_20230518_071932-fourier.csv',
-		'view_20230517_070505-fourier.csv',
-		'view_20230516_071434-fourier.csv',
-		'view_20230513_064542-fourier.csv',
-		'view_20230512_073958-fourier.csv',
-		'view_20230511_072311-fourier.csv',
-		'view_20230510_072237-fourier.csv',
-		'view_20230509_083238-fourier.csv'
-	]
+	print( 'use all the csv-files in the current folder' )
+	for name in glob.glob('./*-fourier.csv'):
+		#print(name)
+		fname += [name]
 
 print( '------- fname -------')
 for ii in range(0, len(fname)): 
@@ -107,9 +102,13 @@ for ii in range(0, len(fname)):
 		print( total_sample, ii, fname[ii] )
 
 
+dt_now = datetime.datetime.now()
+dt_string = dt_now.strftime('%Y%m%d_%H%M%S')
+print ( "DataTime: ", dt_string )
+
 print( '------- Output Result -------')
 print( 'Total Samples: ' + str(total_sample) )
-fw = open ( 'total-phase-analysis.csv', 'w')	#なんかおかしい
+fw = open ( 'total-phase-analysis_' + dt_string + '.csv', 'w')	#
 idx = 0
 fsum = total_sample
 for data in  data1:
