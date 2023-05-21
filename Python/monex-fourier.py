@@ -2,6 +2,8 @@
 # フーリエ展開プログラム (monex-fourier.py)
 # made by digi-p@nifty.com,(C)2023, MIT License
 #
+import os
+import glob
 import csv
 from datetime import datetime
 import math
@@ -9,11 +11,35 @@ import sys
 
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
+fname = ''
+flist = []
+
 # マネックス証券の口座全体の資産推移からダウンロードしたcsvファイル名
-# スクリプト引数で、ファイル名を渡す場合
-fname = sys.argv[1]
-# ハードコーディグで、ファイル名を渡す場合
-#fname = 'view_20230513_064542.csv'
+if len(sys.argv) > 1:
+	# スクリプト引数で、ファイル名を渡す場合
+	print( 'use the csv-files in argv' )
+	fname = sys.argv[1]
+
+else:
+	# ハードコーディグで、ファイル名を渡す場合
+	#fname = 'view_20230513_064542.csv'
+	print( 'use all the csv-files in the current folder' )
+	for name in glob.glob('view_*[0-9].csv'):
+		#print(name)
+		name_split = name.split('.')
+		#print(name_split)
+		if os.path.isfile( name_split[0] + "-fourier.csv"):
+			# print( 'skip ' + name )
+			continue
+		else:
+			#print( name_split[0] ) 
+			fname = name_split[0] + ".csv"
+			break
+if fname == '':
+	print('no csv file to be converted!');
+	print( 'Done' )
+	exit();
+
 print( fname )
 
 fname_split = fname.split('.')
@@ -55,4 +81,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 		# print ( ii/2, amp, tilt )
 		fw.write( str(ii/2) + ', ' + str(amp)  + ', '+ str(tilt) + '\n' )
 	fw.close()
+
+
+print( 'Done' )
 
