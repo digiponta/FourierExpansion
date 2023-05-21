@@ -21,7 +21,7 @@ if len(sys.argv) > 1:
 	fname = sys.argv[1]
 
 else:
-	# ハードコーディグで、ファイル名を渡す場合
+	# カレントディレクトリになる未経産のファイル名を対象にする場合、但し、１度に１ファイルの処理
 	#fname = 'view_20230513_064542.csv'
 	print( 'use all the csv-files in the current folder' )
 	for name in glob.glob('view_*[0-9].csv'):
