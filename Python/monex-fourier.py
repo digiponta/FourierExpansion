@@ -8,7 +8,10 @@ import csv
 from datetime import datetime
 import math
 import sys
-import subprocess
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+import matplotlib.ticker as ticker
 
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
@@ -45,10 +48,15 @@ print( fname )
 
 fname_split = fname.split('.')
 
+delta1 = []
+delta2 = []
+
 with open( fname, 'r', encoding="utf-8") as fr:
 	reader = csv.reader(fr)
 	top = True
 	data = []
+	delta1 = []
+	delta2 = []
 	for line in reader:
 		if top:
 			top = False
@@ -83,6 +91,38 @@ with open( fname, 'r', encoding="utf-8") as fr:
 		fw.write( str(ii/2) + ', ' + str(amp)  + ', '+ str(tilt) + '\n' )
 	fw.close()
 
+	# delta1
+
+	for ii in range( 0, len(data)-1 ):
+		#print ( ii, data[ii] )
+		delta1 += [float(data[ii][1]) - float(data[ii+1][1])]
+	delta1 += [ 0.0 ]
+	print ( 'delta1: ' )
+	print (delta1)
+
+	#delta2
+
+	for ii in range( 0, len(delta1)-1 ):
+		print ( ii, delta1[ii] )
+		delta2 += [float(delta1[ii]) - float(delta1[ii+1])]
+	delta2 += [ 0.0 ]
+	print ( 'delta2: ' )
+	print (delta2)
+
+
+	#plt.plot(x, y)
+
+	#y = np.cos(x)
+	plt.plot(delta1, delta2)
+	plt.title("Topological Space of Gains and losses on shares held")
+	plt.xlabel("dx/dt: Daily delta ")
+	plt.ylabel("d2x/dt2: Daily delta delta")
+
+	 
+	plt.savefig( fname_split[0] + "-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.show()
+
+
 # make graph
 
 
@@ -90,17 +130,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 # フーリエ展開プログラム (monex-fourier.py)
 # made by digi-p@nifty.com,(C)2023, MIT License
 #
-import os
-import glob
-import csv
-from datetime import datetime
-import math
-import sys
-import datetime
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import cm
-import matplotlib.ticker as ticker
+
 
  
 x = np.arange(0, 17, 0.5)
