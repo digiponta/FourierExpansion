@@ -114,9 +114,10 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	#y = np.cos(x)
 	plt.plot(delta1, delta2)
+	plt.grid(True)
 	plt.title("Topological Space of Gains and losses on shares held")
-	plt.xlabel("dx/dt: Daily delta ")
-	plt.ylabel("d2x/dt2: Daily delta delta")
+	plt.xlabel("dx/dt (Daily delta)")
+	plt.ylabel("d2x/dt2 (Daily delta delta)")
 
 	 
 	plt.savefig( fname_split[0] + "-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
