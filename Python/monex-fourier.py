@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import matplotlib.ticker as ticker
+import numpy as np
 
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
@@ -55,6 +56,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	reader = csv.reader(fr)
 	top = True
 	data = []
+	zz = []
 	delta1 = []
 	delta2 = []
 	for line in reader:
@@ -95,10 +97,12 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	for ii in range( 0, len(data)-1 ):
 		#print ( ii, data[ii] )
+		zz += [float(data[ii][1])]
 		delta1 += [float(data[ii][1]) - float(data[ii+1][1])]
 	delta1 += [ 0.0 ]
-	print ( 'delta1: ' )
-	print (delta1)
+	zz +=  [ 0.0 ]
+	#print ( 'delta1: ' )
+	#print (delta1)
 
 	#delta2
 
@@ -106,8 +110,8 @@ with open( fname, 'r', encoding="utf-8") as fr:
 		print ( ii, delta1[ii] )
 		delta2 += [float(delta1[ii]) - float(delta1[ii+1])]
 	delta2 += [ 0.0 ]
-	print ( 'delta2: ' )
-	print (delta2)
+	#print ( 'delta2: ' )
+	#print (delta2)
 
 	fw = open ( fname_split[0] + '-topological.csv', 'w')
 	for ii in range (0, len(delta1)):
@@ -115,20 +119,46 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	fw.close()
 
+	print ("zz ", zz)
+	print ("delta1 ", delta1)
 
 	#plt.plot(x, y)
-
+	fig = plt.figure()
+	ax = fig.add_subplot(projection='3d')
 	#y = np.cos(x)
-	plt.plot(delta1, delta2)
+	x = np.random.rand(50)
+	y = np.random.rand(50)
+	z = np.random.rand(50)
+	#ax.scatter( x, y, z, color='blue')
+	ax.plot( delta1, delta2, zz, color='blue')
+
+	ax.set_title('Topological Space of Gains and losses on shares held')
+	ax.set_xlabel('dx/dt (Daily delta)')
+	ax.set_ylabel('d2x/dt2 (Daily delta delta)')
+	ax.set_zlabel('x')
+	ax.legend()
+	plt.savefig( fname_split[0] + "-3d-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.show()
+
+	plt.plot( zz, delta1 )
 	plt.grid(True)
+
+	plt.title("Topological Space of Gains and losses on shares held")
+	plt.xlabel("x")
+	plt.ylabel("dx/dt (Daily delta)")
+	 
+	plt.savefig( fname_split[0] + "-2d-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.show()
+
+	plt.plot( delta1, delta2 )
+	plt.grid(True)
+
 	plt.title("Topological Space of Gains and losses on shares held")
 	plt.xlabel("dx/dt (Daily delta)")
 	plt.ylabel("d2x/dt2 (Daily delta delta)")
-
-	 
+ 
 	plt.savefig( fname_split[0] + "-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
-
 
 # make graph
 
