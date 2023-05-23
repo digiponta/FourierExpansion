@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import matplotlib.ticker as ticker
 import numpy as np
+from mpl_toolkits.mplot3d import axes3d
+#from sklearn.datasets import load_iris
 
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
@@ -138,7 +140,13 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	ax.set_zlabel('x')
 	ax.legend()
 	plt.savefig( fname_split[0] + "-3d-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	for angle in range(0, 360):
+	    ax.view_init(30, angle)
+	    plt.draw()
+	    plt.pause(.001)
+
 	plt.show()
+
 
 	plt.plot( zz, delta1 )
 	plt.grid(True)
