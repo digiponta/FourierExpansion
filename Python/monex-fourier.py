@@ -155,7 +155,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.xlabel("x")
 	plt.ylabel("dx/dt (Daily delta)")
 	 
-	plt.savefig( fname_split[0] + "-2d-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.savefig( fname_split[0] + "-side-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
 
 	plt.plot( delta1, delta2 )
@@ -165,7 +165,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.xlabel("dx/dt (Daily delta)")
 	plt.ylabel("d2x/dt2 (Daily delta delta)")
  
-	plt.savefig( fname_split[0] + "-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.savefig( fname_split[0] + "-top-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
 
 # make graph
