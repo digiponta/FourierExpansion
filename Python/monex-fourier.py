@@ -109,6 +109,12 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	print ( 'delta2: ' )
 	print (delta2)
 
+	fw = open ( fname_split[0] + '-topological.csv', 'w')
+	for ii in range (0, len(delta1)):
+		fw.write( str(ii/2) + ', ' + str(delta1[ii])  + ', '+ str(delta2[ii]) + '\n' )
+
+	fw.close()
+
 
 	#plt.plot(x, y)
 
