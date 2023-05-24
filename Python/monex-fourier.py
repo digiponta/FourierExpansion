@@ -141,12 +141,8 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	ax.set_zlabel('x')
 	ax.legend()
 	plt.savefig( fname_split[0] + "-3d-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
-	for angle in range(0, 360):
-	    ax.view_init(30, angle)
-	    plt.draw()
-	    plt.pause(.001)
 
-	plt.show()
+
 
 	sxx = 0
 	syy = 0
@@ -155,26 +151,43 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	syz = 0
 	szx = 0
 	for ii in range(0, len(delta1)):
-		sxx += delta1[ii] * delta1[ii]
-		syy += delta2[ii] * delta2[ii]
-		szz += zz[ii] * zz[ii]
-		sxy += delta1[ii] * delta2[ii]
-		syz += delta2[ii] * zz[ii]
-		szx += zz[ii] * delta1[ii]
+		sxx += delta1[ii] * delta1[ii]/ 10000.0
+		syy += delta2[ii] * delta2[ii]/ 10000.0
+		szz += zz[ii] * zz[ii] / 10000.0
+		sxy += delta1[ii] * delta2[ii] / 10000.0
+		syz += delta2[ii] * zz[ii] / 10000.0
+		szx += zz[ii] * delta1[ii] / 10000.0
 
 	mmtx = [
 		[syy * syy + szz * szz, -1.0 * sxy, -1.0 * szx ],
 		[ -1.0 * sxy, sxx * sxx + szz * szz, -1.0 * syz], 
-		[ -1.0 * szx,-1.0 * sxy, sxx * sxx + syy *syy ]]
+		[ -1.0 * szx, -1.0 * syz, sxx * sxx + syy *syy ]]
 
 	print ( "mmtx: ", mmtx)
 
 	mmtx_eig = np.linalg.eig(mmtx)
 
-	print("固有値 {}\n".format(mmtx_eig[0]))
+	print("位相空間内のモーメントの固有値 {}\n".format(mmtx_eig[0]))
 
 	# 固有ベクトルを表示
-	print("固有ベクトル\n{}\n".format(mmtx_eig[1]))
+	print("位相空間内のモーメントの固有ベクトル\n{}\n".format(mmtx_eig[1]))
+
+	xa = mmtx_eig[1][0]
+	ya = mmtx_eig[1][1]
+	za = mmtx_eig[1][2]
+
+	print("xa, ya, za: ", xa, ya, za )
+
+	# なんか、へん？
+	ax.quiver( 0,0,0, xa[0], xa[1], xa[2], color = "green")
+	ax.quiver( 0,0,0, ya[0], ya[1], ya[2], color = "green")
+	ax.quiver( 0,0,0, za[0], za[1], za[2], color = "green")
+
+	for angle in range(0, 360):
+	    ax.view_init(30, angle)
+	    plt.draw()
+	    plt.pause(.001)
+	plt.show()
 	
 
 	plt.plot( zz, delta1 )
