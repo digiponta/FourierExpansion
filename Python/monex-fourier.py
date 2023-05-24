@@ -172,9 +172,9 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	# 固有ベクトルを表示
 	print("位相空間内のモーメントの固有ベクトル\n{}\n".format(mmtx_eig[1]))
 
-	xa = mmtx_eig[1][0]
-	ya = mmtx_eig[1][1]
-	za = mmtx_eig[1][2]
+	xa = -1.0 * mmtx_eig[1][0]
+	ya = -1.0 * mmtx_eig[1][1]
+	za = -1.0 * mmtx_eig[1][2]
 
 	print("xa, ya, za: ", xa, ya, za )
 
