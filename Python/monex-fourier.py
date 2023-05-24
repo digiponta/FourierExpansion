@@ -178,7 +178,12 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	print("xa, ya, za: ", xa, ya, za )
 
-	# なんか、へん？
+	print ("xa.ya: ", xa[0] * ya[0] + xa[1] * ya[1] + xa[2] * ya[2])
+	print ("ya.za: ", ya[0] * za[0] + ya[1] * za[1] + ya[2] * za[2])
+	print ("za.xa: ", za[0] * xa[0] + za[1] * xa[1] + za[2] * xa[2])
+
+
+	# 表示がなんか、へん？　軸のスケールが違うのか？
 	ax.quiver( 0,0,0, xa[0], xa[1], xa[2], color = "green")
 	ax.quiver( 0,0,0, ya[0], ya[1], ya[2], color = "green")
 	ax.quiver( 0,0,0, za[0], za[1], za[2], color = "green")
