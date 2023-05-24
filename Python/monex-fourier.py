@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import matplotlib.ticker as ticker
 import numpy as np
+import numpy as np
 from mpl_toolkits.mplot3d import axes3d
 #from sklearn.datasets import load_iris
 
@@ -128,9 +129,9 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	fig = plt.figure()
 	ax = fig.add_subplot(projection='3d')
 	#y = np.cos(x)
-	x = np.random.rand(50)
-	y = np.random.rand(50)
-	z = np.random.rand(50)
+	#x = np.random.rand(50)
+	#y = np.random.rand(50)
+	#z = np.random.rand(50)
 	#ax.scatter( x, y, z, color='blue')
 	ax.plot( delta1, delta2, zz, color='blue')
 
@@ -147,6 +148,34 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	plt.show()
 
+	sxx = 0
+	syy = 0
+	szz = 0
+	sxy = 0
+	syz = 0
+	szx = 0
+	for ii in range(0, len(delta1)):
+		sxx += delta1[ii] * delta1[ii]
+		syy += delta2[ii] * delta2[ii]
+		szz += zz[ii] * zz[ii]
+		sxy += delta1[ii] * delta2[ii]
+		syz += delta2[ii] * zz[ii]
+		szx += zz[ii] * delta1[ii]
+
+	mmtx = [
+		[syy * syy + szz * szz, -1.0 * sxy, -1.0 * szx ],
+		[ -1.0 * sxy, sxx * sxx + szz * szz, -1.0 * syz], 
+		[ -1.0 * szx,-1.0 * sxy, sxx * sxx + syy *syy ]]
+
+	print ( "mmtx: ", mmtx)
+
+	mmtx_eig = np.linalg.eig(mmtx)
+
+	print("固有値 {}\n".format(mmtx_eig[0]))
+
+	# 固有ベクトルを表示
+	print("固有ベクトル\n{}\n".format(mmtx_eig[1]))
+	
 
 	plt.plot( zz, delta1 )
 	plt.grid(True)
