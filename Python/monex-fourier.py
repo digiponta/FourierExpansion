@@ -135,14 +135,11 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	#ax.scatter( x, y, z, color='blue')
 	ax.plot( delta1, delta2, zz, color='blue')
 
-	ax.set_title('Topological Space of Gains and losses on shares held')
+	ax.set_title('Topological Space of Gains and losses on shares held (3d view)')
 	ax.set_xlabel('dx/dt (Daily delta)')
 	ax.set_ylabel('d2x/dt2 (Daily delta delta)')
 	ax.set_zlabel('x')
 	ax.legend()
-	plt.savefig( fname_split[0] + "-3d-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
-
-
 
 	sxx = 0
 	syy = 0
@@ -184,21 +181,23 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 
 	# 表示がなんか、へん？　軸のスケールが違うのか？
-	ax.quiver( 0,0,0, xa[0], xa[1], xa[2], color = "green")
-	ax.quiver( 0,0,0, ya[0], ya[1], ya[2], color = "green")
-	ax.quiver( 0,0,0, za[0], za[1], za[2], color = "green")
+	ax.quiver( 0,0,0, xa[0], xa[1], xa[2], color = "red")
+	ax.quiver( 0,0,0, ya[0], ya[1], ya[2], color = "red")
+	ax.quiver( 0,0,0, za[0], za[1], za[2], color = "red")
 
 	for angle in range(0, 360):
 	    ax.view_init(30, angle)
 	    plt.draw()
 	    plt.pause(.001)
+
+	plt.savefig( fname_split[0] + "-3d-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
 	
 
 	plt.plot( zz, delta1 )
 	plt.grid(True)
 
-	plt.title("Topological Space of Gains and losses on shares held")
+	plt.title("Topological Space of Gains and losses on shares held (side view)")
 	plt.xlabel("x")
 	plt.ylabel("dx/dt (Daily delta)")
 	 
@@ -208,7 +207,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.plot( delta1, delta2 )
 	plt.grid(True)
 
-	plt.title("Topological Space of Gains and losses on shares held")
+	plt.title("Topological Space of Gains and losses on shares held (top view)")
 	plt.xlabel("dx/dt (Daily delta)")
 	plt.ylabel("d2x/dt2 (Daily delta delta)")
  
