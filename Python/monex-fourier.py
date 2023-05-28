@@ -103,7 +103,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 		zz += [float(data[ii][1])]
 		delta1 += [float(data[ii][1]) - float(data[ii+1][1])]
 	delta1 += [ 0.0 ]
-	zz +=  [ 0.0 ]
+	zz +=  [ float(data[len(data)-1][1]) ]
 	#print ( 'delta1: ' )
 	#print (delta1)
 
