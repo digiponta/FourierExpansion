@@ -197,11 +197,11 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.plot( zz, delta1 )
 	plt.grid(True)
 
-	plt.title("Topological Space of Gains and losses on shares held (side view)")
+	plt.title("Topological Space of Gains and losses on shares held (side view 1)")
 	plt.xlabel("x")
 	plt.ylabel("dx/dt (Daily delta)")
 	 
-	plt.savefig( fname_split[0] + "-side-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.savefig( fname_split[0] + "-side1-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
 
 	plt.plot( delta1, delta2 )
@@ -213,6 +213,18 @@ with open( fname, 'r', encoding="utf-8") as fr:
  
 	plt.savefig( fname_split[0] + "-top-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
+
+	plt.plot( zz, delta2 )
+	plt.grid(True)
+
+	plt.title("Topological Space of Gains and losses on shares held (side view 2)")
+	plt.xlabel("x")
+	plt.ylabel("d2x/dt2 (Daily delta delta)")
+	 
+	plt.savefig( fname_split[0] + "-side2-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.show()
+
+
 
 # make graph
 
