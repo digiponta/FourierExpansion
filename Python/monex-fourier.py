@@ -62,6 +62,8 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	zz = []
 	delta1 = []
 	delta2 = []
+	ElapsedDays = []
+	x = []
 	for line in reader:
 		if top:
 			top = False
@@ -76,6 +78,8 @@ with open( fname, 'r', encoding="utf-8") as fr:
 				ratio = '0.0'
 			if ( days >= 0 ):
 				data += [ [str(days), ratio[0]] ]
+				ElapsedDays += [days]
+				x += [float(ratio[0])]
 	# ここで、データのフィルタリング完了
 	period_max = 15.5
 	fw = open ( fname_split[0] + '-fourier.csv', 'w')
@@ -95,6 +99,26 @@ with open( fname, 'r', encoding="utf-8") as fr:
 		# print ( ii/2, amp, tilt )
 		fw.write( str(ii/2) + ', ' + str(amp)  + ', '+ str(tilt) + '\n' )
 	fw.close()
+
+	fw = open ( fname_split[0] + '-data.csv', 'w')
+	for ii in range(0, len(data)):
+		fw.write(str(data[ii][0]) + ', ' + str(data[ii][1]) + '\n' )
+	fw.close()
+
+	#print ( 'ElapsedDays: ',ElapsedDays)
+	#print ( 'x: ',x)
+
+	plt.plot( ElapsedDays, x )
+	#plt.scatter( float(data[ii][0]), float(data[ii][1]), color='blue' )	
+	plt.grid(True)
+
+	plt.title("Elapsed Days and x")
+	plt.xlabel("Elapsed Days")
+	plt.ylabel("x (%)")
+	 
+	plt.savefig( fname_split[0] + "-data.png")   # プロットしたグラフをファイルsin.pngに保存する
+	plt.show()
+
 
 	# delta1
 
