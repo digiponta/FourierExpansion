@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import matplotlib.ticker as ticker
 import numpy as np
-import numpy as np
 from mpl_toolkits.mplot3d import axes3d
 #from sklearn.datasets import load_iris
+from sklearn.cluster import KMeans
 
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
@@ -247,6 +247,47 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	 
 	plt.savefig( fname_split[0] + "-side2-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
+
+
+
+#pythonCopy codefrom sklearn.cluster 
+#import KMeans
+#import matplotlib.pyplot as plt
+
+# (x, y)のデータを抽出
+
+#print ("delta1: ", delta1)
+
+
+data_array = np.arange(3 * len(zz), dtype=np.float64).reshape(len(zz), 3 )
+
+for ii in range(0, len(zz)):
+	data_array[ii,0] = float(zz[ii])
+	data_array[ii,1] = float(delta1[ii])
+	data_array[ii,2] = 0
+print( data_array.dtype )
+data_array.astype(float)
+
+
+#print(data_array)
+x_values = data_array[:, 0]
+y_values = data_array[:, 1]
+
+# K-meansクラスタリングの実行
+k = 4  # クラスタ数
+kmeans = KMeans(n_clusters=k, random_state=0).fit(data_array[:, :2])
+labels = kmeans.labels_
+
+# クラスタごとにデータをプロット
+for i in range(k):
+    cluster_points = data_array[labels == i, :]
+    plt.scatter(cluster_points[:, 0], cluster_points[:, 1])
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('K-means Clustering')
+plt.savefig( fname_split[0] + "-cluster-topological.png")   # プロットした
+plt.show()
 
 
 
