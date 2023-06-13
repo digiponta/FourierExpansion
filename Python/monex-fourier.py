@@ -284,7 +284,7 @@ for i in range(k):
     plt.scatter(cluster_points[:, 0], cluster_points[:, 1])
 
 plt.xlabel('x')
-plt.ylabel('y')
+plt.ylabel('dx/dt')
 plt.title('K-means Clustering')
 plt.savefig( fname_split[0] + "-cluster-topological.png")   # プロットした
 plt.show()
