@@ -16,6 +16,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import axes3d
 #from sklearn.datasets import load_iris
 from sklearn.cluster import KMeans
+import codecs
 
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
@@ -188,10 +189,15 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	mmtx_eig = np.linalg.eig(mmtx)
 
-	print("位相空間内のモーメントの固有値 {}\n".format(mmtx_eig[0]))
+	fw = open ( fname_split[0] + '-eigenvalues.txt', 'w')
+
+	print("位相空間内のモーメントの固有値 {}\n".format(mmtx_eig[0]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'w', 'utf-8'))
 
 	# 固有ベクトルを表示
-	print("位相空間内のモーメントの固有ベクトル\n{}\n".format(mmtx_eig[1]))
+	print("位相空間内のモーメントの固有ベクトル\n{}\n".format(mmtx_eig[1]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'a', 'utf-8'))
+
+
+	fw.close()
 
 	xa = -1.0 * mmtx_eig[1][0]
 	ya = -1.0 * mmtx_eig[1][1]
@@ -274,7 +280,7 @@ x_values = data_array[:, 0]
 y_values = data_array[:, 1]
 
 # K-meansクラスタリングの実行
-k = 4  # クラスタ数
+k = 5  # クラスタ数
 kmeans = KMeans(n_clusters=k, random_state=0).fit(data_array[:, :2])
 labels = kmeans.labels_
 
