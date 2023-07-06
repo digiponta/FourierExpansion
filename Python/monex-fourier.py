@@ -191,7 +191,9 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	fw = open ( fname_split[0] + '-eigenvalues.txt', 'w')
 
-	print("位相空間内のモーメントの固有値 {}\n".format(mmtx_eig[0]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'w', 'utf-8'))
+	print("位相空間内のモーメントの固有値\n{}\n".format(mmtx_eig[0]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'w', 'utf-8'))
+
+	print("位相空間内のモーメントの固有値傾き\n{}\n".format(mmtx_eig[0][1]/mmtx_eig[0][2]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'a', 'utf-8'))
 
 	# 固有ベクトルを表示
 	print("位相空間内のモーメントの固有ベクトル\n{}\n".format(mmtx_eig[1]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'a', 'utf-8'))
