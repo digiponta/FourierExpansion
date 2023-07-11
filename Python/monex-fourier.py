@@ -121,6 +121,25 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.show()
 
 
+	sx = 0
+	sy = 0
+	sxx = 0
+	syy = 0
+	sxy = 0
+	n = len(ElapsedDays)
+	for ii in range(n):
+		sx += ElapsedDays[ii]
+		sy += x[ii]/100.0
+		sxx += ElapsedDays[ii]*ElapsedDays[ii]
+		syy += x[ii]*x[ii]/(10000.0)
+		sxy += (ElapsedDays[ii] * x[ii]/100.0)
+	t_xy=sxy - (1/n)*sx*sy
+	t_xx=sxx - (1/n)*sx*sx
+	slope = t_xy/t_xx
+	intercept = (1/n)*sy-(1/n)*slope*sx
+	print ("回帰直線: ", slope, intercept, n )
+
+
 	# delta1
 
 	for ii in range( 0, len(data)-1 ):
@@ -197,6 +216,9 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 	# 固有ベクトルを表示
 	print("位相空間内のモーメントの固有ベクトル\n{}\n".format(mmtx_eig[1]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'a', 'utf-8'))
+
+
+	print ("回帰直線:\n{}\n".format([slope, intercept, n]), file=codecs.open(fname_split[0] + '-eigenvalues.txt', 'a', 'utf-8') )
 
 
 	fw.close()
