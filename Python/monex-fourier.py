@@ -282,6 +282,55 @@ with open( fname, 'r', encoding="utf-8") as fr:
 
 
 
+UsdYen = []
+UsdDays = []
+isFirst = 0;
+UsdX = []
+UsdY = []
+
+#with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\quote.csv', 'r', encoding="utf-8") as fr:
+with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\quote.csv', 'r', encoding='shift_jis') as fr:
+	reader = csv.reader(fr)
+	for line in reader:
+		if (isFirst < 4):
+			isFirst += 1
+		else:
+			ds = line[0].split('/')
+			yy = int( ds[0] )
+			mm = int( ds[1] )
+			dd = int( ds[2] )
+			days = (datetime(yy, mm, dd) - org).days
+			if (days >= 0):
+				UsdDays += [days]
+				UsdYen += [1.0 / float(line[1])]
+fr.close()
+
+for ii in range( 0, len (x) ):
+	for jj in range(0, len(ElapsedDays) ):
+		if (ElapsedDays[ii] == UsdDays[jj] ):
+			UsdY += [ElapsedDays[ii]]
+			UsdX += [x[ii] * UsdYen[jj] / 100.0 ]
+			break
+
+
+print ("x: ", len(x), x)
+print ("UsdDays: ", len(UsdDays), UsdDays)
+
+print ("UsdX: ", len(UsdX), UsdX)
+print ("UsdY: ", len(UsdY), UsdY)
+#print ("UsdElapsedDays: ", len(ElapsedDays), ElapsedDays)
+
+plt.title("Toatl Stocks (USD)")
+plt.xlabel("Elapsed Days")
+plt.ylabel("Toatal Stock (USD)")
+
+plt.plot( UsdY, UsdX )
+plt.savefig( fname_split[0] + "-UsdYen.png")   # プロットした
+
+plt.show()
+
+
+
 #pythonCopy codefrom sklearn.cluster 
 #import KMeans
 #import matplotlib.pyplot as plt
