@@ -318,6 +318,7 @@ for ii in range( 0, len (x) ):
 print ( "OrgUsdYen: ", OrgUsdYen)
 print ("x: ", len(x), x)
 print ("UsdDays: ", len(UsdDays), UsdDays)
+print ("UsdYen: ", len(UsdYen), UsdYen )
 
 print ("UsdX: ", len(UsdX), UsdX)
 print ("UsdY: ", len(UsdY), UsdY)
@@ -326,7 +327,9 @@ print ("UsdY: ", len(UsdY), UsdY)
 
 plt.title("Total Stocks (USD)")
 
-plt.plot( UsdY, UsdX )
+plt.plot( UsdY, UsdX, label="USD base" )
+plt.plot( ElapsedDays, x, label="Yen base"  )
+plt.legend(loc=0) 
 plt.grid(True)
 plt.xlabel("Elapsed Days")
 plt.ylabel("USD bades Total Stock (%)")
