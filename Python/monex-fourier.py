@@ -287,6 +287,7 @@ UsdDays = []
 isFirst = 0;
 UsdX = []
 UsdY = []
+OrgUsdYen = 100
 
 #with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\quote.csv', 'r', encoding="utf-8") as fr:
 with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\quote.csv', 'r', encoding='shift_jis') as fr:
@@ -303,16 +304,18 @@ with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\quo
 			if (days >= 0):
 				UsdDays += [days]
 				UsdYen += [1.0 / float(line[1])]
+				if (days == 0):
+					OrgUsdYen = float(line[1])
 fr.close()
 
 for ii in range( 0, len (x) ):
 	for jj in range(0, len(ElapsedDays) ):
 		if (ElapsedDays[ii] == UsdDays[jj] ):
 			UsdY += [ElapsedDays[ii]]
-			UsdX += [x[ii] * UsdYen[jj] / 100.0 ]
+			UsdX += [x[ii] * UsdYen[jj] * OrgUsdYen  ]
 			break
 
-
+print ( "OrgUsdYen: ", OrgUsdYen)
 print ("x: ", len(x), x)
 print ("UsdDays: ", len(UsdDays), UsdDays)
 
@@ -320,11 +323,13 @@ print ("UsdX: ", len(UsdX), UsdX)
 print ("UsdY: ", len(UsdY), UsdY)
 #print ("UsdElapsedDays: ", len(ElapsedDays), ElapsedDays)
 
-plt.title("Toatl Stocks (USD)")
-plt.xlabel("Elapsed Days")
-plt.ylabel("Toatal Stock (USD)")
+
+plt.title("Total Stocks (USD)")
 
 plt.plot( UsdY, UsdX )
+plt.grid(True)
+plt.xlabel("Elapsed Days")
+plt.ylabel("USD bades Total Stock (%)")
 plt.savefig( fname_split[0] + "-UsdYen.png")   # プロットした
 
 plt.show()
@@ -364,6 +369,7 @@ for i in range(k):
     cluster_points = data_array[labels == i, :]
     plt.scatter(cluster_points[:, 0], cluster_points[:, 1])
 
+plt.grid(True)
 plt.xlabel('x')
 plt.ylabel('dx/dt')
 plt.title('K-means Clustering')
