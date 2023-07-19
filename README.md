@@ -44,4 +44,10 @@ python monex-phase-analysis.py view_20230509_xxxxxx-fourier.csv view_20230510_xx
 
 * https://note.com/digiponta/m/m4549d2a07d5a
 
+---
+[各種データ取得先URL]
+
+* 日経平均株価／日次データ） https://indexes.nikkei.co.jp/nkave/index?type=download
+* 外国為替公示相場ヒストリカルデータ／日次データ） https://www.mizuhobank.co.jp/market/historical.html
+
 以上
