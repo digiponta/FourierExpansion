@@ -315,6 +315,11 @@ for ii in range( 0, len (x) ):
 			UsdX += [x[ii] * UsdYen[jj] * OrgUsdYen  ]
 			break
 
+LineX = [ 0, ElapsedDays[0] ]
+LineY = [ intercept, (slope * ElapsedDays[0] + intercept)*100 ]
+
+print ("ElapsedDays[0]",ElapsedDays[0] )
+
 print ( "OrgUsdYen: ", OrgUsdYen)
 print ("x: ", len(x), x)
 print ("UsdDays: ", len(UsdDays), UsdDays)
@@ -329,6 +334,8 @@ plt.title("Total Stocks (USD)")
 
 plt.plot( UsdY, UsdX, label="USD base" )
 plt.plot( ElapsedDays, x, label="Yen base"  )
+plt.plot( LineX, LineY, label="Regression Line"  )
+
 plt.legend(loc=0) 
 plt.grid(True)
 plt.xlabel("Elapsed Days")
