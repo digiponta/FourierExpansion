@@ -52,7 +52,7 @@ fr.close()
 #print( "lines2",lines2 )
 
 
-diff = len (lines2) - len (lines1)
+diff =  len (lines1) - len (lines2)
 
 print ("diff", diff)
 
@@ -67,7 +67,7 @@ shutil.copyfile( fname2,"latest_backup.csv" )
 for ii in range (len(lines2)-1,len(lines1)-1 ):
 	lines2 += [lines1[ii]]
 
-diff = len (lines2) - len (lines1)
+diff = len (lines1) - len (lines2) 
 
 #print ("diff", diff)
 
