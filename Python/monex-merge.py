@@ -79,7 +79,7 @@ diff = len (lines1) - len (lines2)
 
 fw = open ( fname2, 'w')
 for ii in range(0, len(lines2)):
-	fw.write( str(lines2[ii]).replace('[', '') )
+	fw.write( str(lines2[ii]).replace('[', '').replace("'", '' ) )
 	fw.write( '\n' )
 fw.close()
 
