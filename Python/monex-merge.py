@@ -60,20 +60,24 @@ if (diff <= 0):
 	print ("no action")
 	exit()
 
+fname2_sprit = fname2.split('.')
 
-shutil.copyfile( fname2,"latest_backup.csv" ) 
+if (not os.path.isfile(fname2_sprit[0] + "-org.csv") ):
+	print ("make the backup to ",fname2_sprit[0] + "-org.csv" )
+	shutil.copyfile( fname2, fname2_sprit[0] + "-org.csv") 
+else:
+	print ("exist: ",fname2_sprit[0] + "-org.csv" )
 
-
-for ii in range (len(lines2)-1,len(lines1)-1 ):
+for ii in range (len(lines2)-2,len(lines1) ):
 	lines2 += [lines1[ii]]
 
 diff = len (lines1) - len (lines2) 
 
 #print ("diff", diff)
 
-print ("lines2", lines2 )
+#print ("lines2", lines2 )
 
-fw = open ( 'test.csv', 'w')
+fw = open ( fname2, 'w')
 for ii in range(0, len(lines2)):
 	fw.write( str(lines2[ii]).replace('[', '') )
 	fw.write( '\n' )
