@@ -280,6 +280,46 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.savefig( fname_split[0] + "-side2-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
 
+fr.close()
+
+NikkeiX = []
+NikkeiY = []
+NikkeiDays = []
+NikkeiRate = []
+OrgNikkei = 1.0
+isFirst = 0;
+
+with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\\nikkei_stock_average_daily_jp.csv', 'r', encoding='shift_jis') as fr:
+#with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\quote.csv', 'r', encoding='shift_jis') as fr:
+	reader = csv.reader(fr)
+	for line in reader:
+		if (isFirst < 2):
+			isFirst += 1
+		else:
+			ds = line[0].split('/')
+			if ds[0].find("本") >= 0:
+				break
+			yy = int( ds[0] )
+			mm = int( ds[1] )
+			dd = int( ds[2] )
+			days = (datetime(yy, mm, dd) - org).days
+			if (days >= 0):
+				NikkeiX += [days]
+				NikkeiY += [float(line[1])]
+				if (days == 0):
+					OrgNikkei = float(line[1])
+fr.close()
+
+print( "OrgNikkei: ", OrgNikkei )
+
+print( "len(NikkeiX): ", len(NikkeiX) )
+
+for ii in range( 0, len (x) ):
+	for jj in range(0, len(NikkeiX) ):
+		if (ElapsedDays[ii] == NikkeiX[jj] ):
+			NikkeiDays += [ElapsedDays[ii]]
+			NikkeiRate += [(NikkeiY[jj] / OrgNikkei - 1.0) * 100 ]
+			break
 
 
 UsdYen = []
@@ -335,6 +375,7 @@ plt.title("Total Stocks (USD)")
 plt.plot( UsdY, UsdX, label="USD base" )
 plt.plot( ElapsedDays, x, label="Yen base"  )
 plt.plot( LineX, LineY, label="Regression Line"  )
+plt.plot( NikkeiDays, NikkeiRate,linestyle = "dotted", label="Nikkei Average"  )
 
 plt.legend(loc=0) 
 plt.grid(True)
