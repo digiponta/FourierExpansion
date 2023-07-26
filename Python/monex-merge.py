@@ -62,11 +62,11 @@ if (diff <= 0):
 
 fname2_sprit = fname2.split('.')
 
-if (not os.path.isfile(fname2_sprit[0] + "-org.csv") ):
-	print ("make the backup to ",fname2_sprit[0] + "-org.csv" )
-	shutil.copyfile( fname2, fname2_sprit[0] + "-org.csv") 
+if (not os.path.isfile("org-" + fname2_sprit[0] + ".csv") ):
+	print ("make the backup to ","org-" + fname2_sprit[0] + ".csv" )
+	shutil.copyfile( fname2, "org-" + fname2_sprit[0] + ".csv") 
 else:
-	print ("exist: ",fname2_sprit[0] + "-org.csv" )
+	print ("exist: ","org-" + fname2_sprit[0] + ".csv" )
 
 for ii in range (len(lines2)-2,len(lines1) ):
 	lines2 += [lines1[ii]]
@@ -77,9 +77,14 @@ diff = len (lines1) - len (lines2)
 
 #print ("lines2", lines2 )
 
-fw = open ( fname2, 'w')
+fw = open ( fname2, 'w', encoding="utf-8" )
+#fw = open ( "test.csv", 'w' )
 for ii in range(0, len(lines2)):
-	fw.write( str(lines2[ii]).replace('[', '').replace("'", '' ) )
+	line = lines2[ii]
+	fw.write( line[0] )
+	for jj in range (1, len(line)):
+		fw.write( "," )
+		fw.write( str(line[jj]).replace( ",", "").replace( "'", "") )
 	fw.write( '\n' )
 fw.close()
 
