@@ -117,7 +117,7 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.xlabel("Elapsed Days")
 	plt.ylabel("x (%)")
 	 
-	plt.savefig( fname_split[0] + "-data.png")   # プロットしたグラフをファイルsin.pngに保存する
+#	plt.savefig( fname_split[0] + "-data.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
 
 
@@ -260,7 +260,9 @@ with open( fname, 'r', encoding="utf-8") as fr:
 	plt.savefig( fname_split[0] + "-side1-topological.png")   # プロットしたグラフをファイルsin.pngに保存する
 	plt.show()
 
-	plt.plot( delta1, delta2 )
+	#plt.plot( delta1, delta2 )
+	plt.scatter( delta1, delta2 )
+
 	plt.grid(True)
 
 	plt.title("Topological Space of Gains and losses on shares held (top view)")
@@ -375,7 +377,7 @@ plt.title("Total Stocks (USD)")
 plt.plot( UsdY, UsdX, label="USD base" )
 plt.plot( ElapsedDays, x, label="Yen base"  )
 plt.plot( LineX, LineY, label="Regression Line"  )
-plt.plot( NikkeiDays, NikkeiRate,linestyle = "dotted", label="Nikkei Average"  )
+plt.plot( NikkeiDays, NikkeiRate,linestyle = "dotted", label="Nikkei Average (Yen base)"  )
 
 plt.legend(loc=0) 
 plt.grid(True)
