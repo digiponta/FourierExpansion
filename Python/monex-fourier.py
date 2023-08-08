@@ -18,6 +18,11 @@ from mpl_toolkits.mplot3d import axes3d
 from sklearn.cluster import KMeans
 import codecs
 
+os.system('powershell -Command' + ' ' + "wget https://www.mizuhobank.co.jp/market/quote.csv")
+
+os.system('powershell -Command' + ' ' + "wget https://indexes.nikkei.co.jp/nkave/historical/nikkei_stock_average_daily_jp.csv")
+
+
 org = datetime (2023, 3, 1 ); # 資金運用開始年月日
 
 fname = ''
@@ -413,7 +418,7 @@ x_values = data_array[:, 0]
 y_values = data_array[:, 1]
 
 # K-meansクラスタリングの実行
-k = 5  # クラスタ数
+k = 7  # クラスタ数
 kmeans = KMeans(n_clusters=k, random_state=0).fit(data_array[:, :2])
 labels = kmeans.labels_
 
