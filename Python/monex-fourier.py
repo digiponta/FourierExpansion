@@ -356,7 +356,7 @@ with open( 'D:\GAMEPC-2017\Documents\XX_マネックス証券損益データ\quo
 fr.close()
 
 for ii in range( 0, len (x) ):
-	for jj in range(0, len(ElapsedDays) ):
+	for jj in range(0, len(UsdDays) ):
 		if (ElapsedDays[ii] == UsdDays[jj] ):
 			UsdY += [ElapsedDays[ii]]
 			UsdX += [x[ii] * UsdYen[jj] * OrgUsdYen  ]
